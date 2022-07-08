@@ -41,12 +41,7 @@ class WelcomeScreen extends StatelessWidget {
               const SizedBox(height: 20),
               ButtonLarge(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, 'login');
                 },
                 size: size,
                 text: "Login",
@@ -56,12 +51,7 @@ class WelcomeScreen extends StatelessWidget {
               const SizedBox(height: 15),
               ButtonLarge(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const RegisterScreen(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, 'register');
                 },
                 size: size,
                 text: "Create Account",

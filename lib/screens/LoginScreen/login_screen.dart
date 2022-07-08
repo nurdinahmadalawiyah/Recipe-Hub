@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/components/button_large.dart';
 import 'package:recipe_hub/components/input_form_email.dart';
 import 'package:recipe_hub/components/input_form_password.dart';
-import 'package:recipe_hub/screens/HomeScreen/home_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -21,7 +20,9 @@ class LoginScreen extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 20, top: 20),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, 'register');
+              },
               child: Text(
                 'Create account',
                 style: GoogleFonts.poppins(
@@ -96,12 +97,7 @@ class LoginScreen extends StatelessWidget {
                   backgroundColor: primaryColor,
                   textColor: whiteColor,
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const HomeScreen(),
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, 'home');
                   },
                 ),
               ),

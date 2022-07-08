@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:recipe_hub/components/logo_components.dart';
-import 'package:recipe_hub/screens/LoginScreen/login_screen.dart';
-import 'package:recipe_hub/screens/WelcomeScreen/welcome_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,12 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var duration = const Duration(seconds: 3);
     return Timer(duration, () {
       if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const WelcomeScreen(),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, 'welcome');
       }
     });
   }

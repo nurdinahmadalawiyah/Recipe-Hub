@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               PopupMenuItem(
-                onTap: () => Future(() {}),
+                onTap: () => Future(() => Navigator.pushReplacementNamed(context, 'welcome')),
                 child: ListTile(
                   trailing: const Icon(
                     Icons.logout_rounded,
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
         LoginScreen(), // Sementara
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
-        backgroundColor: secondaryColor,
+        backgroundColor: tertiaryColor,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;

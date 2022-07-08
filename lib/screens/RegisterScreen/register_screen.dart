@@ -21,7 +21,9 @@ class RegisterScreen extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 20, top: 20),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, 'login');
+              },
               child: Text(
                 'Login',
                 style: GoogleFonts.poppins(
