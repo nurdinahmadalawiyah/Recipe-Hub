@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:recipe_hub/components/logo_components.dart';
 import 'package:recipe_hub/screens/LoginScreen/login_screen.dart';
+import 'package:recipe_hub/screens/WelcomeScreen/welcome_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => LoginScreen(),
+            builder: (BuildContext context) => WelcomeScreen(),
           ),
         );
       }

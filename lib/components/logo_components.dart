@@ -18,7 +18,7 @@ class LogoComponents extends StatelessWidget {
       children: <Widget>[
         SvgPicture.asset(
           "assets/icons/logo.svg",
-          height: size.height * 0.2,
+          height: size.height * 0.15,
         ),
         const SizedBox(
           height: 5,
@@ -29,7 +29,7 @@ class LogoComponents extends StatelessWidget {
             Text(
               "Recipe ",
               style: GoogleFonts.poppins(
-                fontSize: 33,
+                fontSize: 30,
                 fontWeight: FontWeight.w700,
                 color: primaryColor,
               ),
@@ -37,7 +37,7 @@ class LogoComponents extends StatelessWidget {
             Text(
               "Hub",
               style: GoogleFonts.poppins(
-                fontSize: 33,
+                fontSize: 30,
                 fontWeight: FontWeight.w700,
                 color: blackColor,
               ),
