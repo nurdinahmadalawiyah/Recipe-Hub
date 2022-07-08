@@ -3,10 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/components/button_large.dart';
 import 'package:recipe_hub/components/input_form_email.dart';
 import 'package:recipe_hub/components/input_form_password.dart';
+import 'package:recipe_hub/components/input_form_username.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class LoginScreen extends StatelessWidget {
             child: GestureDetector(
               onTap: () {},
               child: Text(
-                'Create account',
+                'Login',
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -50,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Welcome Back!",
+                    "Welcome to Recipe Hub!",
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
@@ -59,11 +60,12 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Login ",
+                    "Create ",
                     style: GoogleFonts.poppins(
                       fontSize: 25,
                       fontWeight: FontWeight.w800,
@@ -71,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Now.",
+                    "your account.",
                     style: GoogleFonts.poppins(
                       fontSize: 25,
                       fontWeight: FontWeight.w800,
@@ -81,15 +83,19 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 50),
+              const InputFormUsername(),
+              const SizedBox(height: 20),
               const InputFormEmail(),
               const SizedBox(height: 20),
               const InputFormPassword(labelText: 'Password',),
+              const SizedBox(height: 20),
+              const InputFormPassword(labelText: 'Confirm Password',),
               const SizedBox(height: 50),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: size.width * 0.3),
                 child: ButtonLarge(
                   size: size,
-                  text: 'Login',
+                  text: 'Register',
                   backgroundColor: primaryColor,
                   textColor: whiteColor,
                   onPressed: () {},

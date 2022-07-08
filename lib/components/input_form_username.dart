@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_hub/components/text_field_widget.dart';
 
-class InputFormPassword extends StatelessWidget {
-  const InputFormPassword({
+class InputFormUsername extends StatelessWidget {
+  const InputFormUsername({
     Key? key,
   }) : super(key: key);
 
@@ -12,8 +12,10 @@ class InputFormPassword extends StatelessWidget {
     return SizedBox(
       width: size.width * 0.8,
       child: const TextFieldWidget(
-        labelText: 'Password',
-        prefixIcon: Icons.lock_rounded,
+        labelText: 'Username',
+        prefixIcon: Icons.person_rounded,
+        textInputType: TextInputType.text,
+        obscureText: false,
       ),
     );
   }

@@ -6,17 +6,22 @@ class TextFieldWidget extends StatelessWidget {
     Key? key,
     required this.labelText,
     required this.prefixIcon,
+    required this.textInputType,
+    required this.obscureText,
   }) : super(key: key);
 
   final String labelText;
   final IconData prefixIcon;
+  final TextInputType textInputType;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: (value) {},
+      obscureText: obscureText,
       cursorColor: primaryColor,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: textInputType,
       decoration: InputDecoration(
         filled: true,
         labelText: labelText,

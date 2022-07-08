@@ -14,6 +14,8 @@ class InputFormEmail extends StatelessWidget {
       child: const TextFieldWidget(
         labelText: 'Email',
         prefixIcon: Icons.email_rounded,
+        textInputType: TextInputType.emailAddress,
+        obscureText: false,
       ),
     );
   }
