@@ -9,16 +9,21 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.all(15),
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 15,
-        crossAxisSpacing: 15,
-        childAspectRatio: 2/3
-      ),
+          crossAxisCount: 2,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 15,
+          childAspectRatio: 2 / 3),
       itemCount: dummyCategories.length,
       itemBuilder: (context, index) {
         final category = dummyCategories[index];
-        return CategoryItem(id: category.id, images: category.images, title: category.title, );
+        return CategoryItem(
+          id: category.id,
+          images: category.images,
+          title: category.title,
+        );
       },
     );
   }

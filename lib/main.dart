@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_hub/screens/SplashScreen/splash_screen.dart';
+import 'package:recipe_hub/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recipe Hub',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: primaryGreen,
         useMaterial3: true,
       ),
       home: const SplashScreen(),

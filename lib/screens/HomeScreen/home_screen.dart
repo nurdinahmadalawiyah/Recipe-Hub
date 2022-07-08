@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
+import 'package:recipe_hub/screens/LoginScreen/login_screen.dart';
+import 'package:recipe_hub/screens/WelcomeScreen/welcome_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: Row(
@@ -80,7 +90,50 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: CategoryScreen(),
+      body: <Widget>[
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'Categories',
+                style: GoogleFonts.poppins(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: blackColor,
+                ),
+              ),
+            ),
+            const Expanded(child: CategoryScreen()),
+          ],
+        ),
+        WelcomeScreen(), // Sementara
+        LoginScreen(), // Sementara
+      ][currentPageIndex],
+      bottomNavigationBar: NavigationBar(
+        backgroundColor: secondaryColor,
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.home_rounded),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.list_alt_rounded),
+            label: 'List',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.person_rounded),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 }
