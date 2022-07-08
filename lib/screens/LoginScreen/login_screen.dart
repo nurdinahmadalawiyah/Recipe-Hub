@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/components/button_large.dart';
 import 'package:recipe_hub/components/input_form_email.dart';
 import 'package:recipe_hub/components/input_form_password.dart';
+import 'package:recipe_hub/screens/HomeScreen/home_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -83,7 +84,9 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 50),
               const InputFormEmail(),
               const SizedBox(height: 20),
-              const InputFormPassword(labelText: 'Password',),
+              const InputFormPassword(
+                labelText: 'Password',
+              ),
               const SizedBox(height: 50),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: size.width * 0.3),
@@ -92,7 +95,14 @@ class LoginScreen extends StatelessWidget {
                   text: 'Login',
                   backgroundColor: primaryColor,
                   textColor: whiteColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const HomeScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 50),
