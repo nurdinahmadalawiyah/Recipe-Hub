@@ -15,7 +15,7 @@ class CategoryScreen extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 2 / 3),
+          childAspectRatio: 4 / 5),
       itemCount: dummyCategories.length,
       itemBuilder: (context, index) {
         final category = dummyCategories[index];

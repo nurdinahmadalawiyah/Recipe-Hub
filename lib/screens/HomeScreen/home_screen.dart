@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
+import 'package:recipe_hub/screens/ListScreen/list_screen.dart';
 import 'package:recipe_hub/screens/LoginScreen/login_screen.dart';
 import 'package:recipe_hub/screens/WelcomeScreen/welcome_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
@@ -99,8 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 'Categories',
                 style: GoogleFonts.poppins(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                   color: blackColor,
                 ),
               ),
@@ -108,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Expanded(child: CategoryScreen()),
           ],
         ),
-        WelcomeScreen(), // Sementara
+        const ListScreen(),
         LoginScreen(), // Sementara
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(

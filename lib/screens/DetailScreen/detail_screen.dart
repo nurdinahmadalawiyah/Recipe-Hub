@@ -31,6 +31,7 @@ class DetailScreen extends StatelessWidget {
                 child: ClipRRect(
                   child: Image.network(argsFood['image'],
                       height: MediaQuery.of(context).size.width * 0.7,
+                      width: double.infinity,
                       fit: BoxFit.cover),
                 ),
               ),
@@ -82,7 +83,7 @@ class DetailScreen extends StatelessWidget {
               children: [
                 Text('Ingredients',
                     style: GoogleFonts.poppins(
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: blackColor,
                     )),
