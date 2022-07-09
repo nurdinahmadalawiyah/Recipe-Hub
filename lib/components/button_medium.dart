@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_hub/utils/colors.dart';
 
 class ButtonMedium extends StatelessWidget {
   const ButtonMedium({

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
 import 'package:recipe_hub/screens/ListScreen/list_screen.dart';
-import 'package:recipe_hub/screens/LoginScreen/login_screen.dart';
-import 'package:recipe_hub/screens/WelcomeScreen/welcome_screen.dart';
+import 'package:recipe_hub/screens/ProfileScreen/profile_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -110,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         const ListScreen(),
-        LoginScreen(), // Sementara
+        const ProfileScreen()
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: tertiaryColor,

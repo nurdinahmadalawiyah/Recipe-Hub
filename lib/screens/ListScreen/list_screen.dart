@@ -8,8 +8,6 @@ class ListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> argsRecipes =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
       backgroundColor: whiteColor,
       body: Column(
