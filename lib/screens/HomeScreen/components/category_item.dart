@@ -14,29 +14,33 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Card(
-      elevation: 0,
-      color: secondaryColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: size.height * 0.25,
-            width: size.width * 0.9,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: NetworkImage(images),
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(
+        context,
+        'recipes',
+        arguments: {
+          'id': id,
+          'title': title,
+        },
+      ),
+      child: Card(
+        elevation: 0,
+        color: secondaryColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: size.height * 0.25,
+              width: size.width * 0.9,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: NetworkImage(images),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Text(
+            Text(
               title,
               style: GoogleFonts.poppins(
                 fontSize: 14,
@@ -44,8 +48,11 @@ class CategoryItem extends StatelessWidget {
                 color: darkgreyColor,
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
       ),
     );
   }

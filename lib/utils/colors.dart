@@ -6,6 +6,7 @@ const tertiaryColor = Color(0xFFCEECDF);
 const whiteColor = Color(0xFFFFFFFF);
 const blackColor = Color(0xFF000000);
 const darkgreyColor = Color(0xFF49454F);
+const backgroundColor = Color(0xFFEDF8F3);
 
 const MaterialColor primaryGreen = MaterialColor(
   _greenPrimaryValue,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_hub/screens/SplashScreen/splash_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:recipe_hub/utils/routes.dart';
 
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: routes,
-      home: const SplashScreen(),
+      initialRoute: '/',
     );
   }
 }
