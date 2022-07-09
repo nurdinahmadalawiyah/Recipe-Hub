@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_hub/screens/DetailScreen/detail_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/recipes.dart';
 import 'package:recipe_hub/screens/HomeScreen/home_screen.dart';
 import 'package:recipe_hub/screens/LoginScreen/login_screen.dart';
@@ -14,5 +15,6 @@ Map<String, WidgetBuilder> get routes {
       'register' : (context) => const RegisterScreen(),
       'home' : (context) => const HomeScreen(),
       'recipes' :(context) => const Recipes(),
+      'detail' : (context) => const DetailScreen(),
     };
   }

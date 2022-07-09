@@ -27,11 +27,11 @@ class CategoryItem extends StatelessWidget {
         elevation: 0,
         color: secondaryColor,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               height: size.height * 0.25,
-              width: size.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
@@ -40,16 +40,18 @@ class CategoryItem extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              title,
-              style: GoogleFonts.poppins(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: darkgreyColor,
+            Container(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Center(
+                child: Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: darkgreyColor,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
             ),
           ],
         ),

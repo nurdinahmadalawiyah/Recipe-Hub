@@ -28,6 +28,10 @@ class ButtonLarge extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           color: backgroundColor,
+          border: Border.all(
+            color: primaryColor,
+            width: 1,
+          ),
           boxShadow: [
             BoxShadow(
               color: primaryColor.withOpacity(0.2),
