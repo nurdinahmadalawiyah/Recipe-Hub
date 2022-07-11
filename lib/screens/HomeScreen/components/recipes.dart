@@ -14,7 +14,7 @@ class Recipes extends StatelessWidget {
     Map<String, dynamic> argsRecipes =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     List<Food> filteredFood = dummy_food.where((food) {
-      return food.category.contains(argsRecipes['id']);
+      return food.category.contains(argsRecipes['idCategory']);
     }).toList();
     return Scaffold(
       backgroundColor: backgroundColor,

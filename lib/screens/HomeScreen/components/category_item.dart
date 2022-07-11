@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recipe_hub/providers/category.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem(
-      {Key? key, required this.title, required this.id, required this.images})
+      {Key? key,
+      // required this.dataCategories
+      required this.title, required this.idCategory, required this.images
+      })
       : super(key: key);
 
-  final String id;
+  final String idCategory;
   final String title;
   final String images;
+
+  // DataCategory dataCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class CategoryItem extends StatelessWidget {
         context,
         'recipes',
         arguments: {
-          'id': id,
+          'idCategory': idCategory,
           'title': title,
         },
       ),

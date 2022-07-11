@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_hub/models/dummy_data.dart';
+import 'package:recipe_hub/providers/category.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_item.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -7,6 +9,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataCategory dataCategory = Provider.of<DataCategory>(context);
     return GridView.builder(
       padding: const EdgeInsets.all(15),
       scrollDirection: Axis.vertical,
@@ -16,12 +19,14 @@ class CategoryScreen extends StatelessWidget {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           childAspectRatio: 4 / 5),
-      itemCount: dummyCategories.length,
+      // itemCount: dummyCategories.length,
+      itemCount: dataCategory.dataCategories.length,
       itemBuilder: (context, index) {
-        final category = dummyCategories[index];
+        // final category = dummyCategories[index];
+        final category = dataCategory.dataCategories[index];
         return CategoryItem(
-          id: category.id,
-          images: category.images,
+          idCategory: category.idCategory,
+          images: category.image,
           title: category.title,
         );
       },

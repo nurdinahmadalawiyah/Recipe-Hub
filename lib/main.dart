@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_hub/providers/category.dart';
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:recipe_hub/utils/routes.dart';
 
@@ -11,14 +13,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Recipe Hub',
-      theme: ThemeData(
-        primarySwatch: primaryGreen,
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => DataCategory(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Recipe Hub',
+        theme: ThemeData(
+          primarySwatch: primaryGreen,
+          useMaterial3: true,
+        ),
+        routes: routes,
+        initialRoute: '/',
       ),
-      routes: routes,
-      initialRoute: '/',
     );
   }
 }

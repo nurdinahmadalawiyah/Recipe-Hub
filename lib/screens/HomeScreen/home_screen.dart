@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_hub/providers/category.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
 import 'package:recipe_hub/screens/ListScreen/list_screen.dart';
 import 'package:recipe_hub/screens/ProfileScreen/profile_screen.dart';
@@ -17,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    DataCategory dataCategory = Provider.of<DataCategory>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       resizeToAvoidBottomInset: false,
@@ -70,7 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               PopupMenuItem(
-                onTap: () => Future(() => Navigator.pushReplacementNamed(context, 'welcome')),
+                onTap: () => Future(
+                    () => Navigator.pushReplacementNamed(context, 'welcome')),
                 child: ListTile(
                   trailing: const Icon(
                     Icons.logout_rounded,
@@ -105,7 +109,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            const Expanded(child: CategoryScreen()),
+            FutureBuilder(
+              future: dataCategory.getCategory(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 100),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  return const Expanded(child: CategoryScreen());
+                }
+              },
+            ),
+            // )(child: const Expanded(child: CategoryScreen())),
           ],
         ),
         const ListScreen(),
