@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_hub/providers/category.dart';
+import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:recipe_hub/utils/routes.dart';
 
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => DataCategory(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DataFood(),
         ),
       ],
       child: MaterialApp(

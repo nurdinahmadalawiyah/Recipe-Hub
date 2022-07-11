@@ -13,6 +13,7 @@ class DataCategory with ChangeNotifier {
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final List extractData = (jsonDecode(response.body))['data'];
+      dataCategories.clear();
       for (var data in extractData) {
         dataCategories.add(
           CategoryModel(

@@ -10,7 +10,7 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, dynamic> argsFood =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    List<String> ingredients = argsFood['ingredients'];
+    // List<String> ingredients = argsFood['ingredients'];
     return Scaffold(
       backgroundColor: whiteColor,
       body: Column(
@@ -29,10 +29,20 @@ class DetailScreen extends StatelessWidget {
                   ],
                 ),
                 child: ClipRRect(
-                  child: Image.network(argsFood['image'],
-                      height: MediaQuery.of(context).size.width * 0.7,
-                      width: double.infinity,
-                      fit: BoxFit.cover),
+                  child: Image.network(
+                    argsFood['image'],
+                    height: MediaQuery.of(context).size.width * 0.7,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
                 ),
               ),
               SafeArea(
@@ -87,20 +97,30 @@ class DetailScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       color: blackColor,
                     )),
-                Text('${ingredients.length.toString()} items',
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: blackColor,
-                    )),
+                // Text('${ingredients.length.toString()} items',
+                //     style: GoogleFonts.poppins(
+                //       fontSize: 14,
+                //       fontWeight: FontWeight.normal,
+                //       color: blackColor,
+                //     )),
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: IngredientItem(ingredients: ingredients),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.grey[200],
             ),
+            child: Text(argsFood['ingredients'],
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  color: blackColor,
+                )),
+            // child: IngredientItem(ingredients: ingredients),
           )
         ],
       ),

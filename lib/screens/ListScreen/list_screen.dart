@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_hub/models/dummy_data.dart';
+import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class ListScreen extends StatelessWidget {
@@ -8,13 +10,14 @@ class ListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataFood dataFoods = Provider.of<DataFood>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 20, bottom: 10),
             child: Text(
               'List Recipes',
               style: GoogleFonts.poppins(
@@ -26,14 +29,16 @@ class ListScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: dummy_food.length,
+              // itemCount: dummy_food.length,
+              itemCount: dataFoods.dataFoods.length,
               itemBuilder: (context, index) {
-                final food = dummy_food[index];
+                // final food = dummy_food[index];
+                final food = dataFoods.dataFoods[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, 'detail', arguments: {
                       'title': food.title,
-                      'image': food.imageUrl,
+                      'image': food.image,
                       'ingredients': food.ingredients,
                     });
                   },
@@ -45,14 +50,23 @@ class ListScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           width: MediaQuery.of(context).size.width * 0.2,
                           height: MediaQuery.of(context).size.height * 0.1,
-                          decoration: BoxDecoration(
+                          child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(
+                            child: Image.network(
+                              food.image,
                               fit: BoxFit.cover,
-                              image: NetworkImage(food.imageUrl),
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              loadingBuilder: (context, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
                             ),
                           ),
                         ),

@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_hub/providers/category.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem(
       {Key? key,
-      // required this.dataCategories
-      required this.title, required this.idCategory, required this.images
-      })
+      required this.title,
+      required this.idCategory,
+      required this.images})
       : super(key: key);
 
   final String idCategory;
   final String title;
   final String images;
-
-  // DataCategory dataCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +33,22 @@ class CategoryItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               height: size.height * 0.20,
-              decoration: BoxDecoration(
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                image: DecorationImage(
-                  image: NetworkImage(images),
+                child: Image.network(
+                  images,
                   fit: BoxFit.cover,
+                  width: size.width,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
               ),
             ),
