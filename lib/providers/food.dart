@@ -6,7 +6,7 @@ import 'package:recipe_hub/models/food_model.dart';
 
 class DataFood with ChangeNotifier {
   List<FoodModel> dataFoods = [];
-  String foodUrl = 'https://b029-125-164-16-72.ngrok.io';
+  String foodUrl = 'https://a2ce-125-164-17-245.ngrok.io';
 
   Future<void> getFood() async {
     String url = '$foodUrl/api/food';
@@ -21,6 +21,7 @@ class DataFood with ChangeNotifier {
             title: data['title'],
             category: data['category'],
             ingredients: data['ingredients'],
+            instructions: data['instructions'],
             duration: data['duration'],
             image: data['image'],
           ),

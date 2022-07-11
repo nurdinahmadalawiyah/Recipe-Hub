@@ -14,6 +14,7 @@ class FoodModel {
         required this.title,
         required this.category,
         required this.ingredients,
+        required this.instructions,
         required this.duration,
         required this.image,
     });
@@ -22,6 +23,7 @@ class FoodModel {
     String title;
     String category;
     String ingredients;
+    String instructions;
     int duration;
     String image;
 
@@ -30,6 +32,7 @@ class FoodModel {
         title: json["title"],
         category: json["category"],
         ingredients: json["ingredients"],
+        instructions: json["instructions"],
         duration: json["duration"],
         image: json["image"],
     );
@@ -39,6 +42,7 @@ class FoodModel {
         "title": title,
         "category": category,
         "ingredients": ingredients,
+        "instructions": instructions,
         "duration": duration,
         "image": image,
     };

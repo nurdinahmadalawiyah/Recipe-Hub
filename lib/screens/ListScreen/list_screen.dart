@@ -40,6 +40,7 @@ class ListScreen extends StatelessWidget {
                       'title': food.title,
                       'image': food.image,
                       'ingredients': food.ingredients,
+                      'instructions': food.instructions,
                     });
                   },
                   child: Card(

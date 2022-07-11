@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_hub/models/dummy_data.dart';
-import 'package:recipe_hub/models/food.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_hub/models/food_model.dart';
+import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class Recipes extends StatelessWidget {
@@ -11,11 +12,13 @@ class Recipes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataFood dataFoods = Provider.of<DataFood>(context);
     Map<String, dynamic> argsRecipes =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    List<Food> filteredFood = dummy_food.where((food) {
-      return food.category.contains(argsRecipes['idCategory']);
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    List<FoodModel> filteredFood = dataFoods.dataFoods.where((food) {
+      return food.category.contains(argsRecipes['id']);
     }).toList();
+    print(filteredFood);
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -85,9 +88,10 @@ class Recipes extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, 'detail', arguments: {
-                'title' : food.title,
-                'image' : food.imageUrl,
+                'title': food.title,
+                'image': food.image,
                 'ingredients': food.ingredients,
+                'instructions': food.instructions,
               });
             },
             child: Card(
@@ -97,13 +101,22 @@ class Recipes extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
-                    decoration: BoxDecoration(
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      image: DecorationImage(
+                      child: Image.network(
+                        food.image,
                         fit: BoxFit.cover,
-                        image: NetworkImage(food.imageUrl),
+                        width: MediaQuery.of(context).size.width,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
                   ),
