@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/models/dummy_data.dart';
 import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
@@ -29,10 +28,8 @@ class ListScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              // itemCount: dummy_food.length,
               itemCount: dataFoods.dataFoods.length,
               itemBuilder: (context, index) {
-                // final food = dummy_food[index];
                 final food = dataFoods.dataFoods[index];
                 return GestureDetector(
                   onTap: () {

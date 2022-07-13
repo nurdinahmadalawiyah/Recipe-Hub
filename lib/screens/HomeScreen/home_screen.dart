@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_hub/providers/category.dart';
 import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
+import 'package:recipe_hub/screens/HomeScreen/components/logout_dialog.dart';
 import 'package:recipe_hub/screens/ListScreen/list_screen.dart';
 import 'package:recipe_hub/screens/ProfileScreen/profile_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
@@ -76,7 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               PopupMenuItem(
                 onTap: () => Future(
-                    () => Navigator.pushReplacementNamed(context, 'welcome')),
+                  () => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => const LogoutDialog(),
+                  ),
+                ),
                 child: ListTile(
                   trailing: const Icon(
                     Icons.logout_rounded,
@@ -129,19 +134,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         FutureBuilder(
-          future: datafoods.getFood(),
-          builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Padding(
-              padding: EdgeInsets.only(top: 100),
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else {
-            return const ListScreen();
-          }
-        }),
+            future: datafoods.getFood(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Padding(
+                  padding: EdgeInsets.only(top: 100),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else {
+                return const ListScreen();
+              }
+            }),
         // const ListScreen(),
         const ProfileScreen()
       ][currentPageIndex],

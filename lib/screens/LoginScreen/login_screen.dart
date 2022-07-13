@@ -1,12 +1,111 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/components/button_large.dart';
 import 'package:recipe_hub/components/input_form_email.dart';
 import 'package:recipe_hub/components/input_form_password.dart';
 import 'package:recipe_hub/utils/colors.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  late Timer _timer;
+
+  void _validasiLogin() async {
+    if (emailController.text == "" && passwordController.text == "") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 3),
+          content: Text(
+            'Email and Password cannot be empty',
+            textAlign: TextAlign.center,
+          ),
+          backgroundColor: darkgreyColor,
+        ),
+      );
+      return;
+    }
+    showLoaderDialog(context, 30);
+    final response = await http.post(
+        Uri.parse("http://10.0.2.2:8000/api/login"),
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: jsonEncode({
+          "email": emailController.text,
+          "password": passwordController.text
+        }));
+
+    if (response.statusCode == 200) {
+      String dataLogin = response.body;
+      final data = jsonDecode(dataLogin);
+      String resStatus = data["message"];
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      var token = await pref.setString("access_token", json.encode(data['access_token']));
+      await pref.setString("id", json.encode(data['id']));
+      print(token);
+      setState(() {
+        Navigator.pushReplacementNamed(
+            context, 'home');
+      });
+      // print(response.body);
+    } else {
+      setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            duration: Duration(seconds: 3),
+            content: Text(
+              'Wrong email or password entered \nPlease try again!',
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: darkgreyColor,
+          ),
+        );
+      });
+    }
+  }
+
+  showLoaderDialog(BuildContext context, int period) {
+    AlertDialog alert = AlertDialog(
+      content: Row(
+        children: [
+          const CircularProgressIndicator(),
+          Container(
+            margin: const EdgeInsets.only(left: 20),
+            child: Text(
+              "Loading...",
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: primaryColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        _timer = Timer(Duration(seconds: period), () {
+          Navigator.of(context).pop();
+        });
+        return alert;
+      },
+    ).then((value) => {
+          if (_timer.isActive) {_timer.cancel()}
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +182,12 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 50),
-              const InputFormEmail(),
+              InputFormEmail(
+                controller: emailController,
+              ),
               const SizedBox(height: 20),
-              const InputFormPassword(
+              InputFormPassword(
+                controller: passwordController,
                 labelText: 'Password',
               ),
               const SizedBox(height: 50),
@@ -97,7 +199,7 @@ class LoginScreen extends StatelessWidget {
                   backgroundColor: primaryColor,
                   textColor: whiteColor,
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'home');
+                    _validasiLogin();
                   },
                 ),
               ),

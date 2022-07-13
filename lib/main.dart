@@ -5,7 +5,7 @@ import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:recipe_hub/utils/routes.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: routes,
-        initialRoute: '/',
+        initialRoute: 'check_auth',
       ),
     );
   }

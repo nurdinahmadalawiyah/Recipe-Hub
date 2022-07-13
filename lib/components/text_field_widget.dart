@@ -8,17 +8,19 @@ class TextFieldWidget extends StatelessWidget {
     required this.prefixIcon,
     required this.textInputType,
     required this.obscureText,
+    required this.controller,
   }) : super(key: key);
 
   final String labelText;
   final IconData prefixIcon;
   final TextInputType textInputType;
   final bool obscureText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) {},
+      controller: controller,
       obscureText: obscureText,
       cursorColor: primaryColor,
       keyboardType: textInputType,

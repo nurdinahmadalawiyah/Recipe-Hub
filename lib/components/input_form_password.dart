@@ -4,10 +4,11 @@ import 'package:recipe_hub/components/text_field_widget.dart';
 class InputFormPassword extends StatelessWidget {
   const InputFormPassword({
     Key? key,
-    required this.labelText,
+    required this.labelText, required this.controller,
   }) : super(key: key);
 
   final String labelText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class InputFormPassword extends StatelessWidget {
         labelText: labelText,
         prefixIcon: Icons.lock_rounded,
         textInputType: TextInputType.visiblePassword,
-        obscureText: true,
+        obscureText: true, controller: controller,
       ),
     );
   }
