@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/providers/category.dart';
+import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_item.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -8,7 +8,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataCategory dataCategory = Provider.of<DataCategory>(context);
+    DataApi dataCategory = Provider.of<DataApi>(context);
     return GridView.builder(
       padding: const EdgeInsets.all(15),
       scrollDirection: Axis.vertical,

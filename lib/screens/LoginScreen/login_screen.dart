@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_hub/components/button_large.dart';
+import 'package:recipe_hub/components/failed_auth_dialog.dart';
 import 'package:recipe_hub/components/input_form_email.dart';
 import 'package:recipe_hub/components/input_form_password.dart';
 import 'package:recipe_hub/utils/colors.dart';
@@ -46,27 +47,21 @@ class _LoginScreenState extends State<LoginScreen> {
         }));
 
     if (response.statusCode == 200) {
-      String dataLogin = response.body;
-      final data = jsonDecode(dataLogin);
+      final data = jsonDecode(response.body);
       SharedPreferences pref = await SharedPreferences.getInstance();
       await pref.setString("access_token", json.encode(data['access_token']));
       await pref.setString("id", json.encode(data['id']));
       setState(() {
-        Navigator.pushReplacementNamed(
-            context, 'home');
+        Navigator.pushReplacementNamed(context, 'home');
       });
-      // print(response.body);
     } else {
       setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(seconds: 3),
-            content: Text(
-              'Wrong email or password entered \nPlease try again!',
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: darkgreyColor,
-          ),
+        Navigator.pop(context);
+        showDialog(
+          context: context,
+          builder: (BuildContext content) => const FailedAuthDialog(
+              title: 'Login Failed!',
+              content: 'Wrong email or password entered \nPlease try again!'),
         );
       });
     }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/providers/category.dart';
-import 'package:recipe_hub/providers/food.dart';
+import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:recipe_hub/utils/routes.dart';
 
@@ -17,10 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => DataCategory(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => DataFood(),
+          create: (_) => DataApi(),
         ),
       ],
       child: MaterialApp(

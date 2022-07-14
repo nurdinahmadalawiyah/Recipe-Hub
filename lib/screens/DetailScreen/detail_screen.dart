@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_hub/screens/DetailScreen/components/ingredient_item.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -67,7 +66,7 @@ class DetailScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       child: const Icon(
-                        Icons.arrow_back_ios_rounded,
+                        Icons.arrow_back_rounded,
                         color: whiteColor,
                       ),
                     ),

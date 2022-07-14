@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/providers/food.dart';
+import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class ListScreen extends StatelessWidget {
@@ -9,7 +9,7 @@ class ListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataFood dataFoods = Provider.of<DataFood>(context);
+    DataApi dataFoods = Provider.of<DataApi>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       body: Column(

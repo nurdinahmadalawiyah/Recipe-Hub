@@ -62,7 +62,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           SharedPreferences pref = await SharedPreferences.getInstance();
-          await pref.setString("access_token", json.encode(data['access_token']));
+          await pref.setString(
+              "access_token", json.encode(data['access_token']));
           await pref.setString("id", json.encode(data['id']));
           setState(() {
             Navigator.pushReplacementNamed(context, 'home');

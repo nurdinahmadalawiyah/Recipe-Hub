@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:recipe_hub/components/button_medium.dart';
 import 'package:recipe_hub/models/profile_model.dart';
-import 'package:recipe_hub/providers/food.dart';
+import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<ProfileModel> getProfile() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var id = pref.getString("id");
-    String url = 'https://dbc2-36-79-187-57.ngrok.io/api/profile/$id';
+    String url = 'https://386c-36-79-187-57.ngrok.io/api/profile/$id';
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       print(response.body);
@@ -44,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    DataFood dataFoods = Provider.of<DataFood>(context);
+    DataApi dataFoods = Provider.of<DataApi>(context);
     return Center(
       child: SingleChildScrollView(
         child: FutureBuilder<ProfileModel>(

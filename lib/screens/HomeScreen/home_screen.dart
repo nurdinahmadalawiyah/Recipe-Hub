@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/providers/category.dart';
-import 'package:recipe_hub/providers/food.dart';
+import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/logout_dialog.dart';
 import 'package:recipe_hub/screens/ListScreen/list_screen.dart';
@@ -21,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DataCategory dataCategory = Provider.of<DataCategory>(context);
-    DataFood datafoods = Provider.of<DataFood>(context);
+    DataApi dataCategory = Provider.of<DataApi>(context);
+    DataApi datafoods = Provider.of<DataApi>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       resizeToAvoidBottomInset: false,

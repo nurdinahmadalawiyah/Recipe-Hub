@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/providers/food.dart';
+import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class UserRecipeScreen extends StatelessWidget {
   const UserRecipeScreen({Key? key}) : super(key: key);
 
-  @override
+  @override 
   Widget build(BuildContext context) {
-    DataFood dataFoods = Provider.of<DataFood>(context);
+    DataApi dataFoods = Provider.of<DataApi>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
@@ -27,17 +27,6 @@ class UserRecipeScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10),
-            child: Text(
-              'List Recipes',
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: blackColor,
-              ),
-            ),
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: dataFoods.dataFoods.length,
