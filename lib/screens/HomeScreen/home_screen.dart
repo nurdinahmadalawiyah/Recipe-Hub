@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_hub/components/button_medium.dart';
+import 'package:recipe_hub/models/profile_model.dart';
 import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/logout_dialog.dart';
 import 'package:recipe_hub/screens/ListScreen/list_screen.dart';
-import 'package:recipe_hub/screens/ProfileScreen/profile_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,8 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DataApi dataCategory = Provider.of<DataApi>(context);
-    DataApi datafoods = Provider.of<DataApi>(context);
+    DataApi dataApi = Provider.of<DataApi>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       resizeToAvoidBottomInset: false,
@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             FutureBuilder(
-              future: dataCategory.getCategory(),
+              future: dataApi.getCategory(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Padding(
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         FutureBuilder(
-            future: datafoods.getFood(),
+            future: dataApi.getFood(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Padding(
@@ -148,8 +148,75 @@ class _HomeScreenState extends State<HomeScreen> {
                 return const ListScreen();
               }
             }),
-        // const ListScreen(),
-        const ProfileScreen()
+        Center(
+          child: SingleChildScrollView(
+            child: FutureBuilder<ProfileModel>(
+              future: dataApi.getProfile(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 100),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(200),
+                          color: backgroundColor,
+                          border: Border.all(
+                            color: primaryColor,
+                            width: 5,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.person_rounded,
+                          size: 180,
+                          color: primaryColor,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        snapshot.data!.name,
+                        style: GoogleFonts.poppins(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: primaryColor,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        snapshot.data!.email,
+                        style: GoogleFonts.poppins(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: darkgreyColor,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ButtonMedium(
+                        size: MediaQuery.of(context).size,
+                        text: "My Recipe",
+                        backgroundColor: primaryColor,
+                        textColor: whiteColor,
+                        onPressed: () => Navigator.pushNamed(
+                          context,
+                          'user_recipe',
+                          arguments: {'name': snapshot.data!.name},
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              },
+            ),
+          ),
+        ),
+        // ProfileScreen(name: profile.),
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: tertiaryColor,

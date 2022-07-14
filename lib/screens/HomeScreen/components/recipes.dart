@@ -19,6 +19,7 @@ class Recipes extends StatelessWidget {
       return food.category.contains(argsRecipes['id']);
     }).toList();
     print(filteredFood);
+    print(argsRecipes);
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(

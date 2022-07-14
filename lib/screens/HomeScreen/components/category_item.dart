@@ -25,7 +25,7 @@ class CategoryItem extends StatelessWidget {
         'recipes',
         arguments: {
           'id': id,
-          'idCategory': idCategory,
+          'id_category': idCategory,
           'title': title,
         },
       ),
