@@ -16,8 +16,8 @@ class LogoutDialog extends StatelessWidget {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String? token = pref.getString('access_token');
     String? id = pref.getString('id');
-    print(token);
-    print(id);
+    print('access token : $token');
+    print('user id : $id');
   }
 
   @override

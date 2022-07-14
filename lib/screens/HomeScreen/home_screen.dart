@@ -59,7 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
               PopupMenuItem(
-                onTap: () => Future(() {}),
+                onTap: () => Future(() {
+                  Navigator.pushNamed(context, 'about');
+                }),
                 child: ListTile(
                   trailing: const Icon(
                     Icons.info_rounded,

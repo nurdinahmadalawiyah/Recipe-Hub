@@ -7,7 +7,6 @@ import 'package:recipe_hub/components/button_large.dart';
 import 'package:recipe_hub/components/input_form_email.dart';
 import 'package:recipe_hub/components/input_form_password.dart';
 import 'package:recipe_hub/components/input_form_username.dart';
-import 'package:recipe_hub/models/user_view_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         );
       } else {
-        showLoaderDialog(context, 30);
+        showLoaderDialog(context, 5);
         final response = await http
             .post(Uri.parse("http://10.0.2.2:8000/api/register"), body: {
           "name": usernameController.text,
@@ -63,8 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           SharedPreferences pref = await SharedPreferences.getInstance();
-          await pref.setString(
-              "access_token", json.encode(data['access_token']));
+          await pref.setString("access_token", json.encode(data['access_token']));
           await pref.setString("id", json.encode(data['id']));
           setState(() {
             Navigator.pushReplacementNamed(context, 'home');
@@ -111,31 +109,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    // void registerSubmit(BuildContext context) {
-    //   Provider.of<Auth>(context, listen: false)
-    //       .register(usernameController.text, emailController.text,
-    //           passwordController.text)
-    //       .then((response) {
-    //     if (response) {
-    //       Navigator.of(context).pushReplacementNamed('home');
-    //     } else {
-    //       showDialog(
-    //         context: context,
-    //         builder: (context) => AlertDialog(
-    //           title: Text('Error'),
-    //           content: Text('Something went wrong'),
-    //           actions: <Widget>[
-    //             FlatButton(
-    //               child: Text('Ok'),
-    //               onPressed: () => Navigator.of(context).pop(),
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //     }
-    //   });
-    // }
 
     return Scaffold(
       backgroundColor: secondaryColor,

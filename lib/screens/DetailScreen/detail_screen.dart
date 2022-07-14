@@ -86,12 +86,29 @@ class DetailScreen extends StatelessWidget {
                 color: primaryColor,
               ),
             ),
+            Text(
+              argsFood['creator'],
+              style: GoogleFonts.poppins(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: darkgreyColor,
+              ),
+            ),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Container(
+                    width: 5,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: primaryColor,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
                   Text('Ingredients',
                       style: GoogleFonts.poppins(
                         fontSize: 18,
@@ -113,7 +130,11 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[200],
+                color: whiteColor,
+                border: Border.all(
+                  color: primaryColor,
+                  width: 1,
+                ),
               ),
               child: Text(argsFood['ingredients'],
                   style: GoogleFonts.poppins(
@@ -123,17 +144,51 @@ class DetailScreen extends StatelessWidget {
                   )),
               // child: IngredientItem(ingredients: ingredients),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Instructions',
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: blackColor,
-                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 5,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: primaryColor,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Instructions ',
+                        style: GoogleFonts.poppins(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: blackColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.timer_outlined,
+                        color: primaryColor,
+                      ),
+                      Text(
+                        ' ${argsFood['duration']} Minutes',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w500,
+                          color: primaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -143,7 +198,11 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[200],
+                color: whiteColor,
+                border: Border.all(
+                  color: primaryColor,
+                  width: 1,
+                ),
               ),
               child: RichText(
                 softWrap: true,

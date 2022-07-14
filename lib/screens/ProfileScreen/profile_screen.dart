@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:recipe_hub/components/button_medium.dart';
 import 'package:recipe_hub/models/profile_model.dart';
+import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<ProfileModel> getProfile() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var id = pref.getString("id");
-    String url = 'http://eb96-36-79-187-57.ngrok.io/api/profile/$id';
+    String url = 'https://dbc2-36-79-187-57.ngrok.io/api/profile/$id';
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       print(response.body);
@@ -42,6 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    DataFood dataFoods = Provider.of<DataFood>(context);
     return Center(
       child: SingleChildScrollView(
         child: FutureBuilder<ProfileModel>(
@@ -51,11 +54,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
-                    radius: 70,
-                    backgroundImage: NetworkImage(
-                        "https://jalakasih.com/assets/frontend/images/resource/256-512.png"),
-                    backgroundColor: primaryColor,
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(200),
+                      color: backgroundColor,
+                      border: Border.all(
+                        color: primaryColor,
+                        width: 5,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.person_rounded,
+                      size: 180,
+                      color: primaryColor,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -78,11 +90,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 20),
                   ButtonMedium(
                     size: size,
-                    text: "Write Recipe",
+                    text: "My Recipe",
                     backgroundColor: primaryColor,
                     textColor: whiteColor,
-                    onPressed: () {},
-                  )
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'user_recipe');
+                    },
+                  ),
                 ],
               );
             } else if (snapshot.hasError) {

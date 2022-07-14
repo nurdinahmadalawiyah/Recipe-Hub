@@ -13,6 +13,7 @@ class FoodModel {
         required this.id,
         required this.title,
         required this.category,
+        required this.creator,
         required this.ingredients,
         required this.instructions,
         required this.duration,
@@ -22,6 +23,7 @@ class FoodModel {
     int id;
     String title;
     String category;
+    String creator;
     String ingredients;
     String instructions;
     int duration;
@@ -31,6 +33,7 @@ class FoodModel {
         id: json["id"],
         title: json["title"],
         category: json["category"],
+        creator: json["creator"],
         ingredients: json["ingredients"],
         instructions: json["instructions"],
         duration: json["duration"],
@@ -41,6 +44,7 @@ class FoodModel {
         "id": id,
         "title": title,
         "category": category,
+        "creator": creator,
         "ingredients": ingredients,
         "instructions": instructions,
         "duration": duration,

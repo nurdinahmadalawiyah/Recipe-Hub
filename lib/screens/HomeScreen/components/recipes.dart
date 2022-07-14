@@ -90,6 +90,8 @@ class Recipes extends StatelessWidget {
               Navigator.pushNamed(context, 'detail', arguments: {
                 'title': food.title,
                 'image': food.image,
+                'creator': food.creator,
+                'duration': food.duration,
                 'ingredients': food.ingredients,
                 'instructions': food.instructions,
               });
@@ -155,6 +157,16 @@ class Recipes extends StatelessWidget {
                               ],
                             ),
                           ],
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          food.creator.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13,
+                            color: darkgreyColor,
+                          ),
                         ),
                       ],
                     ),

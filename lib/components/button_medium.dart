@@ -23,7 +23,7 @@ class ButtonMedium extends StatelessWidget {
     return ElevatedButton.icon(
       onPressed: onPressed,
       icon: const Icon(
-        Icons.edit,
+        Icons.food_bank_rounded,
         color: whiteColor,
       ),
       style: ElevatedButton.styleFrom(primary: primaryColor, padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),

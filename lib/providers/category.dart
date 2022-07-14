@@ -6,7 +6,7 @@ import 'package:recipe_hub/models/category_model.dart';
 
 class DataCategory with ChangeNotifier {
   List<CategoryModel> dataCategories = [];
-  String categoryUrl = 'https://eb96-36-79-187-57.ngrok.io';
+  String categoryUrl = 'https://dbc2-36-79-187-57.ngrok.io';
 
   Future<void> getCategory() async {
     String url = '$categoryUrl/api/category';

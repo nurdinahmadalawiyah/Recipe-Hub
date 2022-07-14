@@ -48,11 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       String dataLogin = response.body;
       final data = jsonDecode(dataLogin);
-      String resStatus = data["message"];
       SharedPreferences pref = await SharedPreferences.getInstance();
-      var token = await pref.setString("access_token", json.encode(data['access_token']));
+      await pref.setString("access_token", json.encode(data['access_token']));
       await pref.setString("id", json.encode(data['id']));
-      print(token);
       setState(() {
         Navigator.pushReplacementNamed(
             context, 'home');

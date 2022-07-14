@@ -4,19 +4,31 @@ import 'package:provider/provider.dart';
 import 'package:recipe_hub/providers/food.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
-class ListScreen extends StatelessWidget {
-  const ListScreen({Key? key}) : super(key: key);
+class UserRecipeScreen extends StatelessWidget {
+  const UserRecipeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     DataFood dataFoods = Provider.of<DataFood>(context);
     return Scaffold(
       backgroundColor: whiteColor,
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        title: Text(
+          "My Recipes",
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: blackColor,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 10),
+            padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10),
             child: Text(
               'List Recipes',
               style: GoogleFonts.poppins(
@@ -59,7 +71,8 @@ class ListScreen extends StatelessWidget {
                               food.image,
                               fit: BoxFit.cover,
                               width: MediaQuery.of(context).size.width * 0.2,
-                              loadingBuilder: (context, child, loadingProgress) {
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
                                 if (loadingProgress == null) {
                                   return child;
                                 }
@@ -106,6 +119,10 @@ class ListScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
