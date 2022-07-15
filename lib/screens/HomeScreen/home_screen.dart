@@ -6,6 +6,7 @@ import 'package:recipe_hub/models/profile_model.dart';
 import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/logout_dialog.dart';
+import 'package:recipe_hub/screens/HomeScreen/components/popular_screen.dart';
 import 'package:recipe_hub/screens/ListScreen/list_screen.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
@@ -106,6 +107,33 @@ class _HomeScreenState extends State<HomeScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'Popular Recipes',
+                style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: blackColor,
+                ),
+              ),
+            ),
+            FutureBuilder(
+              future: dataApi.getCategory(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 100),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  return const Expanded(child: PopularScreen());
+                }
+              },
+            ),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(

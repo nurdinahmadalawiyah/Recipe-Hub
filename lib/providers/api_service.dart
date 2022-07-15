@@ -8,7 +8,7 @@ import 'package:recipe_hub/models/profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataApi with ChangeNotifier {
-  String baseUrl = 'https://386c-36-79-187-57.ngrok.io';
+  String baseUrl = 'https://f8ed-36-79-187-57.ngrok.io';
 
   List<CategoryModel> dataCategories = [];
   Future<void> getCategory() async {
@@ -36,6 +36,7 @@ class DataApi with ChangeNotifier {
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final List extractData = (jsonDecode(response.body))['data'];
+      print(response.body);
       dataFoods.clear();
       for (var data in extractData) {
         dataFoods.add(
@@ -48,6 +49,7 @@ class DataApi with ChangeNotifier {
             instructions: data['instructions'],
             duration: data['duration'],
             image: data['image'],
+            popular: data['popular'],
           ),
         );
       }
@@ -68,7 +70,5 @@ late Future<ProfileModel> dataProfile;
       throw Exception('Failed to load post');
     }
   }
-
-  static of(BuildContext context) {}
   
 }

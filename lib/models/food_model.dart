@@ -18,6 +18,7 @@ class FoodModel {
         required this.instructions,
         required this.duration,
         required this.image,
+        required this.popular
     });
 
     int id;
@@ -28,6 +29,7 @@ class FoodModel {
     String instructions;
     int duration;
     String image;
+    String popular;
 
     factory FoodModel.fromJson(Map<String, dynamic> json) => FoodModel(
         id: json["id"],
@@ -38,6 +40,7 @@ class FoodModel {
         instructions: json["instructions"],
         duration: json["duration"],
         image: json["image"],
+        popular: json["popular"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -49,5 +52,6 @@ class FoodModel {
         "instructions": instructions,
         "duration": duration,
         "image": image,
+        "popular": popular
     };
 }
