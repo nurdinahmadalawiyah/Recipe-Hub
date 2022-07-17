@@ -12,20 +12,29 @@ class ListScreen extends StatelessWidget {
     DataApi dataFoods = Provider.of<DataApi>(context);
     return Scaffold(
       backgroundColor: whiteColor,
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        title: Text('Official Recipes from Recipe Hub',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: blackColor,
+            )),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 10),
-            child: Text(
-              'List Recipes',
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: blackColor,
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 20, bottom: 10),
+          //   child: Text(
+          //     'List Recipes',
+          //     style: GoogleFonts.poppins(
+          //       fontSize: 18,
+          //       fontWeight: FontWeight.w600,
+          //       color: blackColor,
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: ListView.builder(
               itemCount: dataFoods.dataFoods.length,
@@ -59,7 +68,8 @@ class ListScreen extends StatelessWidget {
                               food.image,
                               fit: BoxFit.cover,
                               width: MediaQuery.of(context).size.width * 0.2,
-                              loadingBuilder: (context, child, loadingProgress) {
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
                                 if (loadingProgress == null) {
                                   return child;
                                 }

@@ -18,6 +18,7 @@ class InputFormUsername extends StatelessWidget {
         labelText: 'Username',
         prefixIcon: Icons.person_rounded,
         textInputType: TextInputType.text,
+        maxLines: 1,
         obscureText: false,
         controller: controller,
       ),

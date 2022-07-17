@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipe_hub/components/logo_components.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
 class AboutScreen extends StatelessWidget {

@@ -18,6 +18,7 @@ class InputFormEmail extends StatelessWidget {
         labelText: 'Email',
         prefixIcon: Icons.email_rounded,
         textInputType: TextInputType.emailAddress,
+        maxLines: 1,
         obscureText: false,
         controller: controller,
       ),

@@ -54,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       } else {
         showLoaderDialog(context, 5);
         final response = await http
-            .post(Uri.parse("http://10.0.2.2:8000/api/register"), body: {
+            .post(Uri.parse("https://recipe-hub-backend.herokuapp.com/api/register"), body: {
           "name": usernameController.text,
           "email": emailController.text,
           "password": passwordController.text

@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     showLoaderDialog(context, 30);
     final response = await http.post(
-        Uri.parse("http://10.0.2.2:8000/api/login"),
+        Uri.parse("https://recipe-hub-backend.herokuapp.com/api/login"),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: jsonEncode({
           "email": emailController.text,

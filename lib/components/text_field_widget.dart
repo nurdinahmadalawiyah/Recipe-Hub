@@ -8,10 +8,11 @@ class TextFieldWidget extends StatelessWidget {
     required this.prefixIcon,
     required this.textInputType,
     required this.obscureText,
-    required this.controller,
+    required this.controller, required this.maxLines,
   }) : super(key: key);
 
   final String labelText;
+  final int maxLines;
   final IconData prefixIcon;
   final TextInputType textInputType;
   final bool obscureText;
@@ -24,6 +25,7 @@ class TextFieldWidget extends StatelessWidget {
       obscureText: obscureText,
       cursorColor: primaryColor,
       keyboardType: textInputType,
+      maxLines: maxLines,
       decoration: InputDecoration(
         filled: true,
         labelText: labelText,

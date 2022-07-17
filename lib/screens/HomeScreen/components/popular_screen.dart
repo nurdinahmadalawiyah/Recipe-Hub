@@ -13,14 +13,10 @@ class PopularScreen extends StatelessWidget {
     List<FoodModel> filteredFood = dataApi.dataFoods.where((food) {
       return food.popular.contains('true');
     }).toList();
-    return GridView.builder(
+    return ListView.builder(
       padding: const EdgeInsets.all(15),
       scrollDirection: Axis.horizontal,
       shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 1,
-          mainAxisSpacing: 10,
-          childAspectRatio: 0.8),
       itemCount: filteredFood.length,
       itemBuilder: (context, index) {
         final popular = filteredFood[index];

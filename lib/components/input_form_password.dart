@@ -18,6 +18,7 @@ class InputFormPassword extends StatelessWidget {
       child: TextFieldWidget(
         labelText: labelText,
         prefixIcon: Icons.lock_rounded,
+        maxLines: 1,
         textInputType: TextInputType.visiblePassword,
         obscureText: true, controller: controller,
       ),

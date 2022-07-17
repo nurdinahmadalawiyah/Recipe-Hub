@@ -36,8 +36,11 @@ class PopularItem extends StatelessWidget {
         elevation: 0,
         color: secondaryColor,
         child: Container(
+            width: size.width * 0.7,
+            height: size.height * 0.5,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
+              color: secondaryColor,
               image: DecorationImage(
                 image: NetworkImage(image),
                 fit: BoxFit.cover,

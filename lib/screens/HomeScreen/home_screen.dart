@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_hub/components/button_medium.dart';
 import 'package:recipe_hub/models/profile_model.dart';
 import 'package:recipe_hub/providers/api_service.dart';
+import 'package:recipe_hub/screens/ComunityRecipeScreen/comunity_recipe_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/category_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/logout_dialog.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/popular_screen.dart';
@@ -118,20 +119,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            FutureBuilder(
-              future: dataApi.getCategory(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 100),
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else {
-                  return const Expanded(child: PopularScreen());
-                }
-              },
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: FutureBuilder(
+                future: dataApi.getCategory(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 100),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  } else {
+                    return const Expanded(child: PopularScreen());
+                  }
+                },
+              ),
             ),
             const SizedBox(height: 10),
             Padding(
@@ -176,6 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return const ListScreen();
               }
             }),
+        const ComunityRecipeScreen(),
         Center(
           child: SingleChildScrollView(
             child: FutureBuilder<ProfileModel>(
@@ -226,17 +231,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      ButtonMedium(
-                        size: MediaQuery.of(context).size,
-                        text: "My Recipe",
-                        backgroundColor: primaryColor,
-                        textColor: whiteColor,
-                        onPressed: () => Navigator.pushNamed(
-                          context,
-                          'user_recipe',
-                          arguments: {'name': snapshot.data!.name},
-                        ),
-                      ),
+                      // ButtonMedium(
+                      //   size: MediaQuery.of(context).size,
+                      //   text: "My Recipe",
+                      //   backgroundColor: primaryColor,
+                      //   textColor: whiteColor,
+                      //   onPressed: () => Navigator.pushNamed(
+                      //     context,
+                      //     'user_recipe',
+                      //     arguments: {'name': snapshot.data!.name},
+                      //   ),
+                      // ),
                     ],
                   );
                 }
@@ -262,6 +267,10 @@ class _HomeScreenState extends State<HomeScreen> {
           NavigationDestination(
             icon: Icon(Icons.list_alt_rounded),
             label: 'List',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.food_bank_rounded),
+            label: 'Comunity',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_rounded),

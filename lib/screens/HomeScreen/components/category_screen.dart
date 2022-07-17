@@ -17,7 +17,7 @@ class CategoryScreen extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 4 / 5),
+          childAspectRatio: 3 / 4),
       itemCount: dataCategory.dataCategories.length,
       itemBuilder: (context, index) {
         final category = dataCategory.dataCategories[index];
