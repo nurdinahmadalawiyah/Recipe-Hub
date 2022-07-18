@@ -17,6 +17,7 @@ class ComunityRecipeScreen extends StatelessWidget {
       backgroundColor: whiteColor,
       appBar: AppBar(
         scrolledUnderElevation: 0,
+        automaticallyImplyLeading: false,
         title: Text(
           'Recipe from Comunity',
           style: GoogleFonts.poppins(
@@ -103,18 +104,26 @@ class ComunityRecipeScreen extends StatelessWidget {
                         "assets/icons/logo.svg",
                         height: MediaQuery.of(context).size.height * 0.05,
                       ),
-                      title: Text(recipe['title'],
-                          style: GoogleFonts.poppins(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: blackColor,
-                          )),
-                      subtitle: Text(recipe['creator'],
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: darkgreyColor,
-                          )),
+                      title: Text(
+                        recipe['title'],
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: blackColor,
+                        ),
+                      ),
+                      subtitle: Text(
+                        recipe['creator'],
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: darkgreyColor,
+                        ),
+                      ),
+                      trailing: const Icon(
+                        Icons.chevron_right_rounded,
+                        color: primaryColor,
+                      ),
                     ),
                   ),
                 );

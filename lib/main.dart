@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Recipe Hub',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: primaryGreen,
           useMaterial3: true,

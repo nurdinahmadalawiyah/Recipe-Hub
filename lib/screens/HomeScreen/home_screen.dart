@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/components/button_medium.dart';
 import 'package:recipe_hub/models/profile_model.dart';
 import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/screens/ComunityRecipeScreen/comunity_recipe_screen.dart';
@@ -105,81 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Popular Recipes',
-                style: GoogleFonts.poppins(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: blackColor,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
-              child: FutureBuilder(
-                future: dataApi.getCategory(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 100),
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  } else {
-                    return const Expanded(child: PopularScreen());
-                  }
-                },
-              ),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Categories',
-                style: GoogleFonts.poppins(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: blackColor,
-                ),
-              ),
-            ),
-            FutureBuilder(
-              future: dataApi.getCategory(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Padding(
-                    padding: EdgeInsets.only(top: 100),
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else {
-                  return const Expanded(child: CategoryScreen());
-                }
-              },
-            ),
-          ],
-        ),
-        FutureBuilder(
-            future: dataApi.getFood(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Padding(
-                  padding: EdgeInsets.only(top: 100),
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              } else {
-                return const ListScreen();
-              }
-            }),
+        const PopularCategoryScreen(),
+        const ListScreen(),
         const ComunityRecipeScreen(),
         Center(
           child: SingleChildScrollView(
@@ -278,6 +204,52 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PopularCategoryScreen extends StatelessWidget {
+  const PopularCategoryScreen({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Text(
+            'Popular Recipes',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: blackColor,
+            ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.only(top: 15, bottom: 10, left: 20),
+          height: MediaQuery.of(context).size.height * 0.2,
+          child: const Expanded(
+            child: PopularScreen(),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Text(
+            'Categories',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: blackColor,
+            ),
+          ),
+        ),
+        const Expanded(child: CategoryScreen())
+      ],
     );
   }
 }

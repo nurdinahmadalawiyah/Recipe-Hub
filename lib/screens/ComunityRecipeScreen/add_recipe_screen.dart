@@ -23,7 +23,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: Text(
-          'Add Your Recipe',
+          'Add Your Recipe', 
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.w600,

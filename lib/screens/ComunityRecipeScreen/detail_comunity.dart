@@ -30,11 +30,15 @@ class DetailComunityScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: ClipRRect(
-                    child: SvgPicture.asset(
-                        "assets/icons/logo.svg",
-                      height: MediaQuery.of(context).size.height * 0.4,
-                      fit: BoxFit.cover,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 60),
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: ClipRRect(
+                      child: SvgPicture.asset(
+                          "assets/icons/logo.svg",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -134,7 +138,6 @@ class DetailComunityScreen extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                     color: blackColor,
                   )),
-              // child: IngredientItem(ingredients: ingredients),
             ),
             const SizedBox(
               height: 10,

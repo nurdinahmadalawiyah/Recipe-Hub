@@ -7,6 +7,7 @@ import 'package:recipe_hub/components/text_field_widget.dart';
 import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
+// ignore: must_be_immutable
 class EditRecipeScreen extends StatefulWidget {
   EditRecipeScreen({Key? key, required this.idDoc}) : super(key: key);
 
@@ -17,10 +18,11 @@ class EditRecipeScreen extends StatefulWidget {
 }
 
 class _EditRecipeScreentate extends State<EditRecipeScreen> {
+
   @override
   Widget build(BuildContext context) {
-    DataApi dataApi = Provider.of<DataApi>(context);
     Size size = MediaQuery.of(context).size;
+    DataApi dataApi = Provider.of<DataApi>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(

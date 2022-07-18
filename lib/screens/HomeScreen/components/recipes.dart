@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_hub/models/food_model.dart';
 import 'package:recipe_hub/providers/api_service.dart';
 import 'package:recipe_hub/utils/colors.dart';
 
@@ -15,10 +15,6 @@ class Recipes extends StatelessWidget {
     DataApi dataFoods = Provider.of<DataApi>(context);
     Map<String, dynamic> argsRecipes =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    List<FoodModel> filteredFood = dataFoods.dataFoods.where((food) {
-      return food.category.contains(argsRecipes['id']);
-    }).toList();
-    print(filteredFood);
     print(argsRecipes);
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -82,102 +78,214 @@ class Recipes extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: filteredFood.length,
-        itemBuilder: (context, index) {
-          final food = filteredFood[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, 'detail', arguments: {
-                'title': food.title,
-                'image': food.image,
-                'creator': food.creator,
-                'duration': food.duration,
-                'ingredients': food.ingredients,
-                'instructions': food.instructions,
-              });
-            },
-            child: Card(
-              margin: const EdgeInsets.only(
-                  bottom: 10, left: 20, right: 20, top: 10),
-              color: secondaryColor,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.network(
-                        food.image,
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
+      body: StreamBuilder<QuerySnapshot<Object?>>(
+        stream: dataFoods.streamCategoryFood(argsRecipes['id_category']),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            var data = snapshot.data!.docs;
+            return ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final food = data[index].data() as Map;
+                Map<String, dynamic>;
+
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'detail', arguments: {
+                      'title': food['title'],
+                      'image': food['image'],
+                      'creator': food['creator'],
+                      'duration': food['duration'],
+                      'ingredients': food['ingredients'],
+                      'instructions': food['instructions'],
+                    });
+                  },
+                  child: Card(
+                    margin: const EdgeInsets.only(
+                        bottom: 10, left: 20, right: 20, top: 10),
+                    color: secondaryColor,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                food.title,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              food['image'],
+                              fit: BoxFit.cover,
+                              width: MediaQuery.of(context).size.width,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      food['title'],
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18,
+                                        color: darkgreyColor,
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.timer_outlined,
+                                        color: primaryColor,
+                                      ),
+                                      Text(
+                                        food['duration'] + ' Minutes',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          color: primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                food['creator'],
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 13,
                                   color: darkgreyColor,
                                 ),
                               ),
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.timer_outlined,
-                                  color: primaryColor,
-                                ),
-                                Text(
-                                  ' ${food.duration.toString()} Minutes',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    color: primaryColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          food.creator.toString(),
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 13,
-                            color: darkgreyColor,
+                            ],
                           ),
-                        ),
+                        )
                       ],
                     ),
-                  )
-                ],
-              ),
-            ),
-          );
+                  ),
+                );
+              },
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         },
       ),
+      // ListView.builder(
+      //   itemCount: filteredFood.length,
+      //   itemBuilder: (context, index) {
+      //     final food = filteredFood[index];
+      // return GestureDetector(
+      //   onTap: () {
+      //     Navigator.pushNamed(context, 'detail', arguments: {
+      //       'title': food.title,
+      //       'image': food.image,
+      //       'creator': food.creator,
+      //       'duration': food.duration,
+      //       'ingredients': food.ingredients,
+      //       'instructions': food.instructions,
+      //     });
+      //   },
+      //   child: Card(
+      //     margin: const EdgeInsets.only(
+      //         bottom: 10, left: 20, right: 20, top: 10),
+      //     color: secondaryColor,
+      //     child: Column(
+      //       crossAxisAlignment: CrossAxisAlignment.start,
+      //       children: [
+      //         SizedBox(
+      //           height: MediaQuery.of(context).size.height * 0.2,
+      //           child: ClipRRect(
+      //             borderRadius: BorderRadius.circular(12),
+      //             child: Image.network(
+      //               food.image,
+      //               fit: BoxFit.cover,
+      //               width: MediaQuery.of(context).size.width,
+      //               loadingBuilder: (context, child, loadingProgress) {
+      //                 if (loadingProgress == null) {
+      //                   return child;
+      //                 }
+      //                 return const Center(
+      //                   child: CircularProgressIndicator(),
+      //                 );
+      //               },
+      //             ),
+      //           ),
+      //         ),
+      //         Padding(
+      //           padding: const EdgeInsets.all(15.0),
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             children: [
+      //               Row(
+      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                 children: [
+      //                   Expanded(
+      //                     child: Text(
+      //                       food.title,
+      //                       overflow: TextOverflow.ellipsis,
+      //                       style: GoogleFonts.poppins(
+      //                         fontWeight: FontWeight.w500,
+      //                         fontSize: 18,
+      //                         color: darkgreyColor,
+      //                       ),
+      //                     ),
+      //                   ),
+      //                   Row(
+      //                     children: [
+      //                       const Icon(
+      //                         Icons.timer_outlined,
+      //                         color: primaryColor,
+      //                       ),
+      //                       Text(
+      //                         ' ${food.duration.toString()} Minutes',
+      //                         style: GoogleFonts.poppins(
+      //                           fontWeight: FontWeight.w500,
+      //                           color: primaryColor,
+      //                         ),
+      //                       ),
+      //                     ],
+      //                   ),
+      //                 ],
+      //               ),
+      //               const SizedBox(height: 5),
+      //               Text(
+      //                 food.creator.toString(),
+      //                 overflow: TextOverflow.ellipsis,
+      //                 style: GoogleFonts.poppins(
+      //                   fontWeight: FontWeight.w400,
+      //                   fontSize: 13,
+      //                   color: darkgreyColor,
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // );
+      //   },
+      // ),
     );
   }
 }

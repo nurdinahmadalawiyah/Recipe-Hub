@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.recipe_hub">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="recipe_hub"
+        android:label="Recipe Hub"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
