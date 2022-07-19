@@ -66,10 +66,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               "access_token", json.encode(data['access_token']));
           await pref.setString("id", json.encode(data['id']));
           setState(() {
-            Navigator.pushReplacementNamed(context, 'home');
+            Navigator.pushReplacementNamed(context, 'main');
           });
         }
-        print(response.body);
+        // print(response.body);
       }
     }
   }

@@ -12,13 +12,13 @@ class LogoutDialog extends StatelessWidget {
     await pref.remove('id');
   }
 
-  void getToken() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    String? token = pref.getString('access_token');
-    String? id = pref.getString('id');
-    print('access token : $token');
-    print('user id : $id');
-  }
+  // void getToken() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   String? token = pref.getString('access_token');
+  //   String? id = pref.getString('id');
+  //   print('access token : $token');
+  //   print('user id : $id');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class LogoutDialog extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           onPressed: () {
-            getToken();
+            // getToken();
             Navigator.pop(context, 'Cancel');
           },
           child: const Text('Cancel'),

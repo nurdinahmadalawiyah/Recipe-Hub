@@ -5,7 +5,7 @@ import 'package:recipe_hub/screens/ComunityRecipeScreen/comunity_recipe_screen.d
 import 'package:recipe_hub/screens/ComunityRecipeScreen/detail_comunity.dart';
 import 'package:recipe_hub/screens/DetailScreen/detail_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/recipes.dart';
-import 'package:recipe_hub/screens/HomeScreen/home_screen.dart';
+import 'package:recipe_hub/screens/main_screen.dart';
 import 'package:recipe_hub/screens/LoginScreen/login_screen.dart';
 import 'package:recipe_hub/screens/RegisterScreen/register_screen.dart';
 import 'package:recipe_hub/screens/SplashScreen/splash_screen.dart';
@@ -19,7 +19,7 @@ Map<String, WidgetBuilder> get routes {
       'welcome' : (context) => const WelcomeScreen(),
       'login' : (context) => const LoginScreen(),
       'register' : (context) => const RegisterScreen(),
-      'home' : (context) => const HomeScreen(),
+      'main' : (context) => const MainScreen(),
       'recipes' :(context) => const Recipes(),
       'detail' : (context) => const DetailScreen(),
       'detail-comunity' :(context) => const DetailComunityScreen(),

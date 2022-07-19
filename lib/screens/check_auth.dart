@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_hub/screens/HomeScreen/home_screen.dart';
+import 'package:recipe_hub/screens/main_screen.dart';
 import 'package:recipe_hub/screens/SplashScreen/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,7 +36,7 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = const HomeScreen();
+      child = const MainScreen();
     } else {
       child = const SplashScreen();
     }

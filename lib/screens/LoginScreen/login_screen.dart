@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await pref.setString("access_token", json.encode(data['access_token']));
       await pref.setString("id", json.encode(data['id']));
       setState(() {
-        Navigator.pushReplacementNamed(context, 'home');
+        Navigator.pushReplacementNamed(context, 'main');
       });
     } else {
       setState(() {

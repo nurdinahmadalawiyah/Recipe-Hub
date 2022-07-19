@@ -15,7 +15,7 @@ class Recipes extends StatelessWidget {
     DataApi dataFoods = Provider.of<DataApi>(context);
     Map<String, dynamic> argsRecipes =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    print(argsRecipes);
+    // print(argsRecipes);
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(

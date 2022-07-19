@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,50 +51,140 @@ class ComunityRecipeScreen extends StatelessWidget {
                     });
                   },
                   onLongPress: () {
-                    showDialog(
+                    showModalBottomSheet<void>(
                       context: context,
-                      builder: (BuildContext content) => AlertDialog(
-                        title: Text(
-                          recipe['title'],
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              dataApi.deleteRecipe(data[index].id);
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              'DELETE',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.red,
-                              ),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ChangeNotifierProvider(
-                                    create: (context) => DataApi(),
-                                    child: EditRecipeScreen(
-                                      idDoc: data[index].id,
+                      builder: (BuildContext context) {
+                        return Container(
+                          height: 150,
+                          color: whiteColor,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext content) =>
+                                          AlertDialog(
+                                        title: Text(
+                                          'Delete ' + recipe['title'],
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              'Cancel',
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              dataApi
+                                                  .deleteRecipe(data[index].id);
+                                              Navigator.pop(context);
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              'OK',
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'DELETE',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                      color: Colors.red,
                                     ),
                                   ),
                                 ),
-                              );
-                            },
-                            child: Text(
-                              'EDIT',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500,
-                              ),
+                                const Divider(),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ChangeNotifierProvider(
+                                          create: (context) => DataApi(),
+                                          child: EditRecipeScreen(
+                                            idDoc: data[index].id,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'EDIT',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     );
+                    // showDialog(
+                    //   context: context,
+                    //   builder: (BuildContext content) => AlertDialog(
+                    //     title: Text(
+                    //       recipe['title'],
+                    //     ),
+                    //     actions: <Widget>[
+                    //       TextButton(
+                    //         onPressed: () {
+                    //           dataApi.deleteRecipe(data[index].id);
+                    //           Navigator.pop(context);
+                    //         },
+                    //         child: Text(
+                    //           'DELETE',
+                    //           style: GoogleFonts.poppins(
+                    //             fontWeight: FontWeight.w500,
+                    //             color: Colors.red,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       TextButton(
+                    //         onPressed: () {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //               builder: (context) => ChangeNotifierProvider(
+                    //                 create: (context) => DataApi(),
+                    //                 child: EditRecipeScreen(
+                    //                   idDoc: data[index].id,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           );
+                    //         },
+                    //         child: Text(
+                    //           'EDIT',
+                    //           style: GoogleFonts.poppins(
+                    //             fontWeight: FontWeight.w500,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // );
                   },
                   child: Card(
                     margin: const EdgeInsets.only(

@@ -12,31 +12,46 @@ class PopularScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     DataApi dataApi = Provider.of<DataApi>(context);
-    return StreamBuilder<QuerySnapshot<Object?>>(
-      stream: dataApi.streamPopularFood(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active) {
-          var data = snapshot.data!.docs;
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              final food = data[index].data() as Map;
-              Map<String, dynamic>;
-              return GestureDetector(
-                onTap: () => Navigator.pushNamed(context, 'detail', arguments: {
-                  'title': food['title'],
-                  'image': food['image'],
-                  'creator': food['creator'],
-                  'duration': food['duration'],
-                  'ingredients': food['ingredients'],
-                  'instructions': food['instructions'],
-                }),
-                child: Card(
-                  margin: const EdgeInsets.only(right: 12),
-                  elevation: 0,
-                  color: secondaryColor,
-                  child: Container(
+    return Scaffold(
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Popular Recipes',
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: blackColor,
+          ),
+        ),
+      ),
+      body: StreamBuilder<QuerySnapshot<Object?>>(
+        stream: dataApi.streamPopularFood(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            var data = snapshot.data!.docs;
+            return ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final food = data[index].data() as Map;
+                Map<String, dynamic>;
+                return GestureDetector(
+                  onTap: () =>
+                      Navigator.pushNamed(context, 'detail', arguments: {
+                    'title': food['title'],
+                    'image': food['image'],
+                    'creator': food['creator'],
+                    'duration': food['duration'],
+                    'ingredients': food['ingredients'],
+                    'instructions': food['instructions'],
+                  }),
+                  child: Card(
+                    margin: const EdgeInsets.only(
+                        bottom: 5, left: 20, right: 20, top: 5),
+                    color: secondaryColor,
+                    elevation: 0,
+                    child: Container(
                       width: size.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
@@ -47,6 +62,7 @@ class PopularScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
+                        height: MediaQuery.of(context).size.height * 0.2,
                         alignment: Alignment.bottomLeft,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -67,17 +83,57 @@ class PopularScreen extends StatelessWidget {
                             color: whiteColor,
                           ),
                         ),
-                      )),
-                ),
-              );
-            },
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      }, 
+                      ),
+                    ),
+                  ),
+                  // Card(
+                  //   margin: const EdgeInsets.only(right: 12),
+                  //   elevation: 0,
+                  //   color: secondaryColor,
+                  //   child: Container(
+                  //     width: size.width * 0.7,
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(12),
+                  //       color: secondaryColor,
+                  //       image: DecorationImage(
+                  //         image: NetworkImage(food['image']),
+                  //         fit: BoxFit.cover,
+                  //       ),
+                  //     ),
+                  //     child: Container(
+                  //       alignment: Alignment.bottomLeft,
+                  //       padding: const EdgeInsets.all(10),
+                  //       decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(12),
+                  //           gradient: LinearGradient(
+                  //             colors: [
+                  //               blackColor.withOpacity(0.7),
+                  //               Colors.transparent,
+                  //             ],
+                  //             begin: Alignment.bottomCenter,
+                  //             end: Alignment.topCenter,
+                  //           )),
+                  //       child: Text(
+                  //         food['title'],
+                  //         style: GoogleFonts.poppins(
+                  //           fontSize: 16,
+                  //           fontWeight: FontWeight.w600,
+                  //           color: whiteColor,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                );
+              },
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }
