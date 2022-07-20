@@ -23,7 +23,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: Text(
-          'Add Your Recipe', 
+          'Add Your Recipe',
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -75,6 +75,25 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   maxLines: 6,
                   obscureText: false,
                   controller: dataApi.instructionsController),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    dataApi.UploadImage();
+                  },
+                  label: const Text('Upload Image'),
+                  icon: const Icon(Icons.image_rounded),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // Text(dataApi.imagePath == null ? 'No Image Selected': dataApi.imageName!),
               const SizedBox(height: 10),
               ButtonMedium(
                 size: size,

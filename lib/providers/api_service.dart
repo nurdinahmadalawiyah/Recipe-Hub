@@ -1,6 +1,9 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart' as storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_hub/models/profile_model.dart';
@@ -13,10 +16,15 @@ class DataApi with ChangeNotifier {
   TextEditingController ingredientsController = TextEditingController();
   TextEditingController instructionsController = TextEditingController();
   TextEditingController durationController = TextEditingController();
+  TextEditingController imageUrlController = TextEditingController();
 
   String baseUrl = 'https://recipe-hub-backend.herokuapp.com';
-
+  String? imageUrl;
+  String? imageName;
   late Future<ProfileModel> dataProfile;
+
+  String? imagePath;
+
   Future<ProfileModel> getProfile() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var id = pref.getString("id");
@@ -31,19 +39,21 @@ class DataApi with ChangeNotifier {
     }
   }
 
-  void addRecipe() {
+  void addRecipe() async {
     CollectionReference recipes = db.collection('recipes');
     if (titleController.text.isNotEmpty &&
         creatorController.text.isNotEmpty &&
         ingredientsController.text.isNotEmpty &&
         instructionsController.text.isNotEmpty &&
-        durationController.text.isNotEmpty) {
+        durationController.text.isNotEmpty &&
+        imageUrl!.isNotEmpty) {
       recipes.add({
         'title': titleController.text,
         'creator': creatorController.text,
         'ingredients': ingredientsController.text,
         'instructions': instructionsController.text,
         'duration': durationController.text,
+        'image': imageUrl,
       });
       titleController.clear();
       creatorController.clear();
@@ -51,7 +61,7 @@ class DataApi with ChangeNotifier {
       instructionsController.clear();
       durationController.clear();
     } else {
-      // print('data tidak boleh kosong');
+      print('data tidak boleh kosong');
     }
   }
 
@@ -80,10 +90,33 @@ class DataApi with ChangeNotifier {
       'ingredients': ingredientsController.text,
       'instructions': instructionsController.text,
       'duration': durationController.text,
+      'image': imageUrlController.text,
     });
   }
 
-  void deleteRecipe(String id) {
+  void UploadImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      imagePath = file.path;
+      try {
+        await FirebaseStorage.instance
+            .ref(result.files.single.name)
+            .putFile(file);
+        imageUrl = await storage.FirebaseStorage.instance
+            .ref(result.files.single.name)
+            .getDownloadURL();
+        imageName = result.files.single.name;
+      } on storage.FirebaseException catch (e) {
+        print(e);
+      }
+    } else {
+      print("Cancelled");
+    }
+  }
+
+  void deleteRecipe(String id) async {
     DocumentReference docRef = db.collection('recipes').doc(id);
     docRef.delete();
   }

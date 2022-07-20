@@ -18,7 +18,6 @@ class EditRecipeScreen extends StatefulWidget {
 }
 
 class _EditRecipeScreentate extends State<EditRecipeScreen> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -46,6 +45,7 @@ class _EditRecipeScreentate extends State<EditRecipeScreen> {
             dataApi.ingredientsController.text = data['ingredients'];
             dataApi.instructionsController.text = data['instructions'];
             dataApi.creatorController.text = data['creator'];
+            dataApi.imageUrlController.text = data['image'];
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -91,6 +91,37 @@ class _EditRecipeScreentate extends State<EditRecipeScreen> {
                         obscureText: false,
                         controller: dataApi.instructionsController),
                     const SizedBox(height: 10),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          dataApi.UploadImage();
+                        },
+                        label: const Text('Upload Image'),
+                        icon: const Icon(Icons.image_rounded),
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    TextField(
+                      enabled: false,
+                      controller: dataApi.imageUrlController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     ButtonMedium(
                       size: size,
                       text: "Update Recipe",
@@ -98,7 +129,6 @@ class _EditRecipeScreentate extends State<EditRecipeScreen> {
                       textColor: whiteColor,
                       onPressed: () {
                         dataApi.updateRecipe(widget.idDoc);
-                        Navigator.pop(context);
                         Navigator.pop(context);
                       },
                     ),

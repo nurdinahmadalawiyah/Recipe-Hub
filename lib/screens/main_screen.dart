@@ -181,7 +181,7 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.trending_up_rounded),
+            icon: Icon(Icons.star_rounded),
             label: 'Popular',
           ),
           NavigationDestination(

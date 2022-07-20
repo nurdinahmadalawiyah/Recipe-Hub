@@ -42,12 +42,6 @@ class AboutScreen extends StatelessWidget {
                 "assets/icons/logo.svg",
                 height: size.height * 0.15,
               ),
-
-              // Icon(
-              //   Icons.person_rounded,
-              //   size: 100,
-              //   color: primaryColor,
-              // ),
             ),
             const SizedBox(height: 20),
             Text(
@@ -68,7 +62,7 @@ class AboutScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Recipe Hub adalah sebuah platform untuk membantu seseorang dalam berbagi dan mencari resep makanan.',
+              'Recipe Hub is a platform for you to search and share your recipes to the world',
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontSize: 14,

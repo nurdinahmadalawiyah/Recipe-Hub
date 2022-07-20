@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_hub/providers/api_service.dart';
@@ -41,7 +40,7 @@ class ComunityRecipeScreen extends StatelessWidget {
                 Map<String, dynamic>;
                 return GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, 'detail-comunity', arguments: {
+                    Navigator.pushNamed(context, 'detail', arguments: {
                       'title': recipe['title'],
                       'image': recipe['image'],
                       'creator': recipe['creator'],
@@ -87,7 +86,6 @@ class ComunityRecipeScreen extends StatelessWidget {
                                             onPressed: () {
                                               dataApi
                                                   .deleteRecipe(data[index].id);
-                                              Navigator.pop(context);
                                               Navigator.pop(context);
                                             },
                                             child: Text(
@@ -141,50 +139,6 @@ class ComunityRecipeScreen extends StatelessWidget {
                         );
                       },
                     );
-                    // showDialog(
-                    //   context: context,
-                    //   builder: (BuildContext content) => AlertDialog(
-                    //     title: Text(
-                    //       recipe['title'],
-                    //     ),
-                    //     actions: <Widget>[
-                    //       TextButton(
-                    //         onPressed: () {
-                    //           dataApi.deleteRecipe(data[index].id);
-                    //           Navigator.pop(context);
-                    //         },
-                    //         child: Text(
-                    //           'DELETE',
-                    //           style: GoogleFonts.poppins(
-                    //             fontWeight: FontWeight.w500,
-                    //             color: Colors.red,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       TextButton(
-                    //         onPressed: () {
-                    //           Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //               builder: (context) => ChangeNotifierProvider(
-                    //                 create: (context) => DataApi(),
-                    //                 child: EditRecipeScreen(
-                    //                   idDoc: data[index].id,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           );
-                    //         },
-                    //         child: Text(
-                    //           'EDIT',
-                    //           style: GoogleFonts.poppins(
-                    //             fontWeight: FontWeight.w500,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // );
                   },
                   child: Card(
                     margin: const EdgeInsets.only(
@@ -192,9 +146,25 @@ class ComunityRecipeScreen extends StatelessWidget {
                     color: secondaryColor,
                     elevation: 0,
                     child: ListTile(
-                      leading: SvgPicture.asset(
-                        "assets/icons/logo.svg",
-                        height: MediaQuery.of(context).size.height * 0.05,
+                      leading: SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            recipe['image'],
+                            fit: BoxFit.cover,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
+                          ),
+                        ),
                       ),
                       title: Text(
                         recipe['title'],

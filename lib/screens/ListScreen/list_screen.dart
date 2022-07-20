@@ -92,60 +92,6 @@ class ListScreen extends StatelessWidget {
                         color: primaryColor,
                       ),
                     ),
-                    // Row(
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     SizedBox(
-                    //       width: MediaQuery.of(context).size.width * 0.2,
-                    //       height: MediaQuery.of(context).size.height * 0.1,
-                    //       child: ClipRRect(
-                    //         borderRadius: BorderRadius.circular(12),
-                    //         child: Image.network(
-                    //           food['image'],
-                    //           fit: BoxFit.cover,
-                    //           width: MediaQuery.of(context).size.width * 0.2,
-                    //           loadingBuilder:
-                    //               (context, child, loadingProgress) {
-                    //             if (loadingProgress == null) {
-                    //               return child;
-                    //             }
-                    //             return const Center(
-                    //               child: CircularProgressIndicator(),
-                    //             );
-                    //           },
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.all(15.0),
-                    //       child: Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Text(
-                    //             food['title'],
-                    //             overflow: TextOverflow.ellipsis,
-                    //             style: GoogleFonts.poppins(
-                    //               fontWeight: FontWeight.w600,
-                    //               fontSize: 15,
-                    //               color: blackColor,
-                    //             ),
-                    //           ),
-                    //           const SizedBox(
-                    //             height: 5,
-                    //           ),
-                    //           Text(
-                    //             food['creator'],
-                    //             style: GoogleFonts.poppins(
-                    //               fontWeight: FontWeight.w500,
-                    //               fontSize: 14,
-                    //               color: darkgreyColor,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                 );
               },

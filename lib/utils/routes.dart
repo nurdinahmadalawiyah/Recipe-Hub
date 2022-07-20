@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:recipe_hub/screens/AboutScreen/about_screen.dart';
 import 'package:recipe_hub/screens/ComunityRecipeScreen/add_recipe_screen.dart';
 import 'package:recipe_hub/screens/ComunityRecipeScreen/comunity_recipe_screen.dart';
-import 'package:recipe_hub/screens/ComunityRecipeScreen/detail_comunity.dart';
 import 'package:recipe_hub/screens/DetailScreen/detail_screen.dart';
 import 'package:recipe_hub/screens/HomeScreen/components/recipes.dart';
 import 'package:recipe_hub/screens/main_screen.dart';
@@ -22,7 +21,6 @@ Map<String, WidgetBuilder> get routes {
       'main' : (context) => const MainScreen(),
       'recipes' :(context) => const Recipes(),
       'detail' : (context) => const DetailScreen(),
-      'detail-comunity' :(context) => const DetailComunityScreen(),
       'about' : (context) => const AboutScreen(),
       'add_recipe' : (context) => const AddRecipeScreen(),
       'comunity_recipe' : (context) => const ComunityRecipeScreen(),
