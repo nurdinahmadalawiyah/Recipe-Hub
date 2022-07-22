@@ -87,6 +87,7 @@ class ComunityRecipeScreen extends StatelessWidget {
                                               dataApi
                                                   .deleteRecipe(data[index].id);
                                               Navigator.pop(context);
+                                              Navigator.pop(context);
                                             },
                                             child: Text(
                                               'OK',

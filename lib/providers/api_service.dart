@@ -19,11 +19,8 @@ class DataApi with ChangeNotifier {
   TextEditingController imageUrlController = TextEditingController();
 
   String baseUrl = 'https://recipe-hub-backend.herokuapp.com';
-  String? imageUrl;
-  String? imageName;
+  late String imageUrl;
   late Future<ProfileModel> dataProfile;
-
-  String? imagePath;
 
   Future<ProfileModel> getProfile() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -45,8 +42,7 @@ class DataApi with ChangeNotifier {
         creatorController.text.isNotEmpty &&
         ingredientsController.text.isNotEmpty &&
         instructionsController.text.isNotEmpty &&
-        durationController.text.isNotEmpty &&
-        imageUrl!.isNotEmpty) {
+        durationController.text.isNotEmpty ) {
       recipes.add({
         'title': titleController.text,
         'creator': creatorController.text,
@@ -90,16 +86,15 @@ class DataApi with ChangeNotifier {
       'ingredients': ingredientsController.text,
       'instructions': instructionsController.text,
       'duration': durationController.text,
-      'image': imageUrlController.text,
+      // 'image': imageUrl,
     });
   }
 
-  void UploadImage() async {
+  void uploadImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
       File file = File(result.files.single.path!);
-      imagePath = file.path;
       try {
         await FirebaseStorage.instance
             .ref(result.files.single.name)
@@ -107,7 +102,6 @@ class DataApi with ChangeNotifier {
         imageUrl = await storage.FirebaseStorage.instance
             .ref(result.files.single.name)
             .getDownloadURL();
-        imageName = result.files.single.name;
       } on storage.FirebaseException catch (e) {
         print(e);
       }

@@ -80,7 +80,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    dataApi.UploadImage();
+                    dataApi.uploadImage();
                   },
                   label: const Text('Upload Image'),
                   icon: const Icon(Icons.image_rounded),
